@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category
+from .models import Category , Evaluation
 from judge.models import Judge
 from  participant.models import Participant
 
@@ -14,10 +14,13 @@ class JudgeAdmin(admin.ModelAdmin):
 class ParticipantAdmin(admin.ModelAdmin):
     pass
 
+class EvaluationAdmin (admin.ModelAdmin):
+    pass
 
 
 
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Judge,JudgeAdmin)
 admin.site.register(Participant,ParticipantAdmin)
+admin.site.register(Evaluation,EvaluationAdmin)
 

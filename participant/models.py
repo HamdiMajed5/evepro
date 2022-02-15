@@ -5,7 +5,7 @@ from django.db import models
 class Participant(models.Model):
     qrid=models.IntegerField(unique=True)
     name=models.CharField(max_length=60)
-    age=models.IntegerField()
+    age=models.IntegerField(null=True,blank=True)
     phone=models.CharField(max_length=60)
 
     def __str__(self):
