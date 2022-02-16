@@ -11,30 +11,35 @@ class Participant(models.Model):
 
     def grand_total(self):
         evals=Evaluation.objects.filter(participant=self)
-        evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
-        student_total = evals['student_mark__sum']
-        parent_total = evals['parent_mark__sum']
-        teacher_total = evals['teacher_mark__sum']
-        return student_total+parent_total+teacher_total
-
+        if evals :
+            evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
+            student_total = evals['student_mark__sum']
+            parent_total = evals['parent_mark__sum']
+            teacher_total = evals['teacher_mark__sum']
+            return student_total+parent_total+teacher_total
+        return 0
     def student_total(self):
         evals=Evaluation.objects.filter(participant=self)
-        evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
-        student_total = evals['student_mark__sum']
-        return student_total
-
+        if evals:
+            evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
+            student_total = evals['student_mark__sum']
+            return student_total
+        return 0
     def parent_total(self):
         evals=Evaluation.objects.filter(participant=self)
-        evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
-        parent_total = evals['parent_mark__sum']
-        return parent_total
+        if evals:
+            evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
+            parent_total = evals['parent_mark__sum']
+            return parent_total
+        return 0
 
     def teacher_total(self):
         evals=Evaluation.objects.filter(participant=self)
-        evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
-        teacher_total = evals['teacher_mark__sum']
-        return teacher_total
-
+        if evals:
+            evals= evals.aggregate(Sum('student_mark'),Sum('parent_mark'),Sum('teacher_mark'))
+            teacher_total = evals['teacher_mark__sum']
+            return teacher_total
+        return 0
 
 
     grand=property(grand_total)
