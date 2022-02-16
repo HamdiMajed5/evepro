@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Category , Evaluation
 from judge.models import Judge
 from  participant.models import Participant
+from django.db.models import F, ExpressionWrapper, DecimalField
 
 # Register your models here.
 
@@ -12,7 +13,26 @@ class JudgeAdmin(admin.ModelAdmin):
     pass
 
 class ParticipantAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = [
+        'student',
+        'parent',
+        'teacher',
+        'grand'
+    ]
+    search_fields = [
+        'qrid',
+        'name'
+    ]
+    list_display = [
+        'qrid',
+        'name',
+        'student',
+        'parent',
+        'teacher',
+        'grand'
+    ]
+
+    
 
 class EvaluationAdmin (admin.ModelAdmin):
     pass

@@ -33,9 +33,10 @@ class Evaluation (models.Model):
     def total(self):
         return self.student_mark+self.parent_mark+ self.teacher_mark
 
+    total=property(total)
 
     def __str__(self):
-        return f"{self.participant.name} - {self.category.name} ({self.total()})"
+        return f"{self.participant.name} - {self.category.name} ({self.total})"
 
     class Meta:
         constraints = [
