@@ -1,4 +1,5 @@
-from django.contrib import admin
+#from django.contrib import admin
+import autocomplete_all as admin
 from .models import Category, Evaluation
 from judge.models import Judge
 from participant.models import Participant
@@ -8,11 +9,15 @@ from django.db.models import F, ExpressionWrapper, DecimalField, Subquery, Sum, 
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    search_fields=[
+        'name'
+    ]
 
 
 class JudgeAdmin(admin.ModelAdmin):
-    pass
+    search_fields = [
+        'name'
+    ]
 
 
 class ParticipantAdmin(admin.ModelAdmin):

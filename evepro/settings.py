@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'participant',
     'category',
     'judge',
+    'autocomplete_all',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

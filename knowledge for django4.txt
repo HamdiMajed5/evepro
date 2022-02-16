@@ -1,0 +1,3 @@
+in django 4 the replacement for is_ajax function is 
+request.headers.get('x-requested-with') == 'XMLHttpRequest'
+change it in the auto_complete_all/auto_complete_all.py line 86 to its alternative
