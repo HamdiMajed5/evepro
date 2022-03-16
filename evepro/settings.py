@@ -25,12 +25,20 @@ SECRET_KEY = 'django-insecure-8pl53i@s)yfs)#@w70qr7az7+yom=3cm6$q=1lu=%_e1llnqi&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG :
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'qrcode',
     'participant',
     'category',
     'judge',
@@ -83,7 +91,7 @@ DATABASES = {
         'NAME': 'evepro',
         'USER': 'phpmyadmin',
         'PASSWORD': 'SOMO@sama',
-        'HOST': '192.168.1.20',
+        'HOST': '127.0.0.1',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },

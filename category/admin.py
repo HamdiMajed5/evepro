@@ -2,9 +2,9 @@
 import autocomplete_all as admin
 from .models import Category, Evaluation
 from judge.models import Judge
-from participant.models import Participant
+from participant.models import Participant ,Teacher
 from django.db.models import F, ExpressionWrapper, DecimalField, Subquery, Sum, Value
-
+from django.shortcuts import render , HttpResponse ,HttpResponseRedirect, redirect ,reverse
 
 # Register your models here.
 
@@ -72,10 +72,33 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 
 class EvaluationAdmin(admin.ModelAdmin):
-    pass
 
+    def response_add(self, request, obj, post_url_continue=None):
+        return HttpResponseRedirect(reverse('qrcode:scan'))
+
+    def response_change(self, request, obj, post_url_continue=None):
+        return HttpResponseRedirect(reverse('qrcode:scan'))
+
+
+class TeacherAdmin(admin.ModelAdmin):
+    search_fields = [
+        'name'
+    ]
+    list_display = [
+        'name',
+        'total'
+    ]
+
+    def total (self,obj):
+        return obj.total
+
+    def get_queryset(self, request):
+        qs = super(TeacherAdmin, self).get_queryset(request)
+        qs=qs.annotate(total=Sum('participant__evaluation__teacher_mark'))
+        return qs
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Judge, JudgeAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(Evaluation, EvaluationAdmin)
+admin.site.register(Teacher,TeacherAdmin)
