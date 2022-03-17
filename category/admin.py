@@ -1,8 +1,6 @@
 #from django.contrib import admin
 import autocomplete_all as admin
-from .models import Category, Evaluation
-from judge.models import Judge
-from participant.models import Participant ,Teacher
+from .models import Category, Evaluation , Participant ,Teacher , Judge
 from django.db.models import F, ExpressionWrapper, DecimalField, Subquery, Sum, Value
 from django.shortcuts import render , HttpResponse ,HttpResponseRedirect, redirect ,reverse
 

@@ -39,9 +39,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'qrcode',
-    'participant',
     'category',
-    'judge',
     'autocomplete_all',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,5 +1,5 @@
 from django.shortcuts import render , HttpResponse ,HttpResponseRedirect, redirect ,reverse
-from participant.models import Participant,Evaluation
+from category.models import Participant,Evaluation
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
@@ -12,7 +12,13 @@ def qr_plain(request, qrid):
     if user.is_authenticated:
         p=Participant.objects.filter(pk=qrid)
         if not p.exists():
-            return HttpResponseRedirect(reverse('qrcode:scan'))
+            new_participant=Participant(
+                id=qrid,
+                name=f"Automated {qrid}",
+                qrid=qrid
+            )
+            new_participant.save()
+            return qr_plain(request, qrid)
         cat=user.judge.category
         if cat :
             eval=Evaluation.objects.filter(participant__pk=qrid,category=cat)
